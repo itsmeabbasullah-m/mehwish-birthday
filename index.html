@@ -3,519 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Mehwish ❤️ - Happy 17th Birthday</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    
+    <title>For Mehwish ❤️</title>
     <style>
         * {
             box-sizing: border-box;
-            user-select: none;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #080312;
+            background: radial-gradient(circle at center, #1b0c2e 0%, #08030f 100%);
             color: #ffffff;
-            overflow-x: hidden;
-            margin: 0;
-            padding: 0;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .font-cursive {
-            font-family: 'Dancing Script', cursive;
-        }
-
-        /* Ambient Glowing Background Effect */
-        .bg-glow {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90vw;
-            height: 90vh;
-            background: radial-gradient(circle, rgba(147, 51, 234, 0.25) 0%, rgba(236, 72, 153, 0.15) 45%, rgba(8, 3, 18, 0) 70%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Glassmorphism Card Style matching original screenshot */
-        .glass-card {
-            background: rgba(22, 13, 36, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7),
-                        0 0 40px rgba(236, 72, 153, 0.18);
-            border-radius: 28px;
-        }
-
-        /* Vibrant Pink-Purple Glowing Action Buttons */
-        .btn-gradient {
-            background: linear-gradient(135deg, #f43f5e 0%, #ec4899 40%, #a855f7 100%);
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-gradient:hover {
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 0 32px rgba(236, 72, 153, 0.9);
-        }
-
-        .btn-gradient:active {
-            transform: translateY(1px) scale(0.98);
-        }
-
-        /* Top Right Floating Music Icon */
-        .music-btn {
-            background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.7);
-            transition: all 0.3s ease;
-        }
-
-        .music-btn:hover {
-            transform: scale(1.12);
-            box-shadow: 0 0 30px rgba(236, 72, 153, 1);
-        }
-
-        /* Glowing Pulse Animation for Heart Icon */
-        .heart-glow {
-            animation: pulseGlow 2s infinite ease-in-out;
-        }
-
-        @keyframes pulseGlow {
-            0% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.7)); }
-            50% { transform: scale(1.15); filter: drop-shadow(0 0 25px rgba(239, 68, 68, 1)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.7)); }
-        }
-
-        /* Custom Scrollbar for Card Text */
-        .custom-scroll::-webkit-scrollbar {
-            width: 5px;
-        }
-        .custom-scroll::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-        .custom-scroll::-webkit-scrollbar-thumb {
-            background: rgba(236, 72, 153, 0.5);
-            border-radius: 10px;
-        }
-
-        /* Floating Particle Canvas */
-        #particle-canvas {
+        #starfield {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
             pointer-events: none;
-            z-index: 2;
+        }
+
+        #heart-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(233, 30, 99, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(233, 30, 99, 0.9);
+        }
+
+        .music-btn.playing {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 550px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .card.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            color: #d1b3ff;
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #ff7eb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #e0d6f5;
+            margin-bottom: 25px;
+        }
+
+        .heart-icon {
+            font-size: 4rem;
+            color: #ff2a75;
+            margin-bottom: 15px;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(255, 42, 117, 0.8));
+            animation: heartBeat 1.2s infinite ease-in-out;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+
+        .age-badge {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #d1b3ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(209, 179, 255, 0.6);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(233, 30, 99, 0.7);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .message-box {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 3px solid #e91e63;
+            margin-bottom: 25px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .message-box p {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ebdcf9;
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-4 relative min-h-screen">
+<body>
 
-    <div class="bg-glow"></div>
-    <canvas id="particle-canvas"></canvas>
+    <canvas id="starfield"></canvas>
+    <canvas id="heart-canvas"></canvas>
 
-    <!-- Top Right Floating Music Toggle Button -->
-    <div class="fixed top-6 right-6 z-50 flex items-center gap-3">
-        <div id="music-status" class="hidden sm:block text-xs font-semibold tracking-wider bg-slate-900/80 text-pink-300 border border-pink-500/30 px-3 py-1.5 rounded-full shadow-lg backdrop-blur-md">
-            Click anywhere to play 🎵
-        </div>
-        <button id="music-btn" class="music-btn w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white text-xl sm:text-2xl cursor-pointer">
-            <i id="music-icon" class="fa-solid fa-music"></i>
-        </button>
-    </div>
+    <button class="music-btn" id="music-btn" title="Toggle Music">🎵</button>
 
-    <!-- Audio Player supporting song.mp3 or fallback -->
+    <!-- Support for both song.m4a and song.mp3 -->
     <audio id="bg-music" loop preload="auto">
-        <source src="song.mp3" type="audio/mpeg">
         <source src="song.m4a" type="audio/mp4">
-        <source src="song.ogg" type="audio/ogg">
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
-    <!-- Main Container Card -->
-    <main class="relative z-10 w-full max-w-xl my-6">
-        <div class="glass-card p-6 sm:p-10 text-center relative overflow-hidden transition-all duration-500">
-
-            <!-- ================= STEP 1: WELCOME SCREEN ================= -->
-            <div id="step-1" class="space-y-8 py-4">
-                <p class="text-xs sm:text-sm font-semibold tracking-widest text-pink-300/80 uppercase">
-                    A LITTLE SURPRISE FOR SOMEONE SPECIAL
-                </p>
-
-                <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-pink-200 to-pink-400 drop-shadow-md">
-                    MEHWISH
-                </h1>
-
-                <p class="text-sm sm:text-base text-slate-300 font-light">
-                    There's something I've been waiting to tell you...
-                </p>
-
-                <div class="pt-4">
-                    <button onclick="goToStep(2)" class="btn-gradient text-white font-bold px-8 py-3.5 rounded-full text-base sm:text-lg flex items-center justify-center gap-2 mx-auto uppercase tracking-wide">
-                        <span>OPEN YOUR SURPRISE</span>
-                        <span class="text-xl">❤️</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= STEP 2: HAPPY BIRTHDAY ================= -->
-            <div id="step-2" class="hidden space-y-6 py-2">
-                <div class="inline-block relative">
-                    <i class="fa-solid fa-heart text-5xl text-red-500 heart-glow"></i>
-                </div>
-
-                <div class="text-6xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-200 to-purple-400">
-                    17
-                </div>
-
-                <h2 class="text-3xl sm:text-5xl font-black tracking-wide text-white uppercase">
-                    HAPPY BIRTHDAY
-                </h2>
-
-                <h2 class="text-4xl sm:text-6xl font-black text-pink-300 tracking-wider">
-                    MEHWISH
-                </h2>
-
-                <div class="space-y-2 text-xs sm:text-sm text-slate-300 font-light px-2">
-                    <p>Today is your special day. 🎂</p>
-                    <p class="leading-relaxed">May this new chapter of your life bring you happiness, beautiful memories, and countless reasons to smile.</p>
-                </div>
-
-                <div class="pt-4">
-                    <button onclick="goToStep(3)" class="btn-gradient text-white font-bold px-8 py-3.5 rounded-full text-sm sm:text-base flex items-center justify-center gap-2 mx-auto uppercase tracking-wide">
-                        <span>THERE'S MORE...</span>
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= STEP 3: MESSAGE FROM HEART ================= -->
-            <div id="step-3" class="hidden space-y-5 text-left py-2">
-                <div class="text-center">
-                    <p class="text-xs font-semibold tracking-widest text-pink-300/80 uppercase mb-1">
-                        A MESSAGE FROM MY HEART
-                    </p>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white flex items-center justify-center gap-3">
-                        <span>Dear Mehwish</span>
-                        <i class="fa-solid fa-heart text-red-500 text-3xl"></i>
-                    </h2>
-                    <p class="text-xs text-pink-300 mt-1">Happy 17th Birthday! 🎂❤️</p>
-                </div>
-
-                <div class="space-y-4 text-xs sm:text-sm text-slate-200 font-light leading-relaxed max-h-[260px] overflow-y-auto custom-scroll pr-2 my-4">
-                    <p>I honestly don't know where to begin, because some feelings are difficult to put into words.</p>
-                    <p>You started as a friend, but somewhere along the way, you became much more special to me.</p>
-                    <p>Your smile, our conversations, and even the smallest moments with you mean more to me than you probably realize.</p>
-                    <p>I hope your 17th year brings you happiness, success, beautiful memories, and everything your heart desires.</p>
-                </div>
-
-                <div class="pt-2 text-center">
-                    <button onclick="goToStep(4)" class="btn-gradient text-white font-bold px-8 py-3.5 rounded-full text-sm sm:text-base flex items-center justify-center gap-2 mx-auto uppercase tracking-wide">
-                        <span>ONE LAST THING</span>
-                        <span class="text-lg">❤️</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= STEP 4: CONFESSION ================= -->
-            <div id="step-4" class="hidden space-y-6 py-2">
-                <div class="inline-block relative">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-pink-500/20 border border-pink-500/40 flex items-center justify-center">
-                        <i class="fa-solid fa-heart text-5xl text-pink-500 heart-glow"></i>
-                    </div>
-                </div>
-
-                <p class="text-xs sm:text-sm font-semibold tracking-widest text-pink-300/80 uppercase">
-                    WHAT I'VE BEEN AFRAID TO SAY
-                </p>
-
-                <h2 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
-                    I LIKE YOU
-                </h2>
-
-                <p class="text-sm sm:text-base text-pink-200/90 italic font-medium">
-                    Not just as a friend.
-                </p>
-
-                <div class="space-y-3 text-xs sm:text-sm text-slate-300 font-light leading-relaxed px-2">
-                    <p>Somewhere along the way, my feelings became something more.</p>
-                    <p>I don't want to pressure you or make you uncomfortable. I just wanted to be honest about what's in my heart.</p>
-                </div>
-
-                <div class="pt-4">
-                    <button onclick="goToStep(5)" class="btn-gradient text-white font-bold px-8 py-3.5 rounded-full text-sm sm:text-base flex items-center justify-center gap-2 mx-auto uppercase tracking-wide">
-                        <span>READ MY QUESTION</span>
-                        <i class="fa-solid fa-envelope"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= STEP 5: THE QUESTION & OPTIONS ================= -->
-            <div id="step-5" class="hidden space-y-6 py-2">
-                <div class="inline-block">
-                    <i class="fa-solid fa-heart text-5xl text-red-500 heart-glow"></i>
-                </div>
-
-                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-wide uppercase">
-                    MEHWISH...
-                </h2>
-
-                <div class="space-y-3 text-xs sm:text-sm text-slate-300 font-light px-2">
-                    <p class="text-base text-pink-200">I know you see me as a friend.</p>
-                    <p>But I've started seeing you as someone much more special.</p>
-                    <p class="pt-2 font-medium text-white">So I just want to ask you one honest question:</p>
-                </div>
-
-                <h3 class="text-base sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-white to-pink-300 px-2">
-                    Would you give me a chance to know each other in a more special way?
-                </h3>
-
-                <!-- Choice Buttons -->
-                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 relative min-h-[100px]" id="choice-container">
-                    <button id="btn-yes" onclick="celebrateYes()" class="btn-gradient text-white font-bold px-8 py-3.5 rounded-full text-sm sm:text-base flex items-center justify-center gap-2 w-full sm:w-auto uppercase tracking-wide z-20">
-                        <span>YES</span>
-                        <span class="text-lg">❤️</span>
-                    </button>
-
-                    <button id="btn-no" class="btn-gradient text-white font-bold px-8 py-3.5 rounded-full text-sm sm:text-base flex items-center justify-center gap-2 w-full sm:w-auto uppercase tracking-wide z-20">
-                        <span>I NEED SOME TIME</span>
-                        <span class="text-lg">💔</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= STEP 6: CELEBRATION RESULT ================= -->
-            <div id="step-6" class="hidden space-y-6 py-4">
-                <div class="text-6xl animate-bounce">🎉💖✨</div>
-
-                <h2 class="text-4xl sm:text-5xl font-extrabold text-pink-300 font-cursive">
-                    Thank You, Mehwish!
-                </h2>
-
-                <p class="text-sm sm:text-base text-slate-200 font-light leading-relaxed px-4">
-                    You've made my heart so happy! I promise to always treat you with care, respect, and love. Here's to us! 🌹
-                </p>
-
-                <div class="p-4 bg-pink-950/40 border border-pink-500/30 rounded-2xl text-xs text-pink-200">
-                    "Happy 17th Birthday once again! Today is all about you."
-                </div>
-
-                <button onclick="goToStep(1)" class="mt-4 bg-slate-800 hover:bg-slate-700 text-pink-300 border border-pink-500/30 px-6 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold transition-all">
-                    Restart Story 🔄
-                </button>
-            </div>
-
+    <div class="container">
+        <!-- Screen 1: Welcome -->
+        <div class="card active" id="card-1">
+            <div class="subtitle">A LITTLE SURPRISE FOR SOMEONE SPECIAL</div>
+            <h1 class="title">MEHWISH</h1>
+            <p class="text">There's something I've been waiting to tell you...</p>
+            <button class="btn" onclick="nextCard(2)">OPEN YOUR SURPRISE ❤️</button>
         </div>
-    </main>
+
+        <!-- Screen 2: Happy Birthday -->
+        <div class="card" id="card-2">
+            <div class="heart-icon">❤️</div>
+            <div class="age-badge">17</div>
+            <h1 class="title">HAPPY BIRTHDAY</h1>
+            <h2 class="title" style="font-size: 2.2rem; margin-top: -15px;">MEHWISH</h2>
+            <p class="text">Today is your special day. 🎂<br>May this new chapter of your life bring you happiness, beautiful memories and countless reasons to smile.</p>
+            <button class="btn" onclick="nextCard(3)">THERE'S MORE... ✨</button>
+        </div>
+
+        <!-- Screen 3: A Message From My Heart -->
+        <div class="card" id="card-3">
+            <div class="subtitle">A MESSAGE FROM MY HEART</div>
+            <h2 class="title" style="font-size: 2rem;">Dear Mehwish ❤️</h2>
+            <p class="subtitle" style="text-transform: none;">Happy 17th Birthday! 🎂❤️</p>
+            
+            <div class="message-box">
+                <p>I honestly don't know where to begin, because some feelings are difficult to put into words.</p>
+                <p>You started as a friend, but somewhere along the way, you became much more special to me.</p>
+                <p>Your smile, our conversations, and even the smallest moments with you mean more to me than you probably realize.</p>
+                <p>I hope your 17th year brings you happiness, success, and beautiful memories.</p>
+            </div>
+
+            <button class="btn" onclick="nextCard(4)">ONE LAST THING ❤️</button>
+        </div>
+
+        <!-- Screen 4: What I've Been Afraid To Say -->
+        <div class="card" id="card-4">
+            <div class="heart-icon">💖</div>
+            <div class="subtitle">WHAT I'VE BEEN AFRAID TO SAY</div>
+            <h1 class="title" style="font-size: 2.5rem;">I LIKE YOU</h1>
+            <p class="subtitle" style="text-transform: none; font-size: 1rem; color: #ff9ebb;">Not just as a friend.</p>
+            <p class="text">Somewhere along the way, my feelings became something more.<br><br>I don't want to pressure you or make you uncomfortable. I just wanted to be honest about what's in my heart.</p>
+            <button class="btn" onclick="nextCard(5)">READ MY QUESTION 📩</button>
+        </div>
+
+        <!-- Screen 5: Proposal Question -->
+        <div class="card" id="card-5">
+            <div class="heart-icon">❤️</div>
+            <h1 class="title" style="font-size: 2.2rem;">MEHWISH...</h1>
+            <p class="text" style="text-align: center; margin-bottom: 15px;">I know you see me as a friend.<br>But I've started seeing you as someone much more special.<br><br>So I just want to ask you one honest question:</p>
+            <p class="text" style="font-weight: 700; color: #ffffff; font-size: 1.15rem;">Would you give me a chance to know each other in a more special way?</p>
+            
+            <div class="btn-group">
+                <button class="btn" onclick="response('Yes! ❤️')">YES ❤️️</button>
+                <button class="btn btn-secondary" onclick="response('I need some time 💭')">I NEED SOME TIME 💖</button>
+            </div>
+        </div>
+
+        <!-- Screen 6: Response Confirmation -->
+        <div class="card" id="card-6">
+            <div class="heart-icon">💖</div>
+            <h1 class="title" style="font-size: 2.2rem;">THANK YOU ❤️</h1>
+            <p class="text" id="response-text" style="font-size: 1.2rem; color: #ffb6c1;"></p>
+            <p class="text">No matter what, I'm always here for you. Have the happiest 17th birthday! 🎉</p>
+        </div>
+    </div>
 
     <script>
-        // --- 1. Step Navigation Logic ---
-        function goToStep(stepNumber) {
-            for (let i = 1; i <= 6; i++) {
-                const el = document.getElementById(`step-${i}`);
-                if (el) el.classList.add('hidden');
-            }
-            const current = document.getElementById(`step-${stepNumber}`);
-            if (current) current.classList.remove('hidden');
-        }
-
-        // --- 2. Floating Heart Particle Canvas ---
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        // Stars background canvas
+        const starCanvas = document.getElementById('starfield');
+        const starCtx = starCanvas.getContext('2d');
+        let stars = [];
 
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height + Math.random() * 100;
-                this.size = Math.random() * 14 + 10;
-                this.speedY = Math.random() * 1.5 + 0.8;
-                this.speedX = (Math.random() - 0.5) * 0.8;
-                this.opacity = Math.random() * 0.7 + 0.3;
-                this.symbol = ['❤️', '💖', '✨', '💕', '🌸'][Math.floor(Math.random() * 5)];
-            }
-
-            update() {
-                this.y -= this.speedY;
-                this.x += this.speedX;
-                if (this.y < -30) {
-                    this.reset();
-                }
-            }
-
-            draw() {
-                ctx.globalAlpha = this.opacity;
-                ctx.font = `${this.size}px Arial`;
-                ctx.fillText(this.symbol, this.x, this.y);
-            }
+            starCanvas.width = window.innerWidth;
+            starCanvas.height = window.innerHeight;
+            initStars();
         }
 
-        for (let i = 0; i < 35; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // --- 3. Audio & Music Player Management ---
-        const audio = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-btn');
-        const musicIcon = document.getElementById('music-icon');
-        const musicStatus = document.getElementById('music-status');
-        let isPlaying = false;
-        let audioCtx = null;
-        let synthInterval = null;
-
-        // Fallback Melody Synthesizer if song.mp3 is missing or blocked
-        function startSynthFallback() {
-            if (audioCtx) return;
-            try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                audioCtx = new AudioContext();
-                const notes = [261.63, 329.63, 392.00, 493.88, 523.25, 659.25];
-                let idx = 0;
-
-                synthInterval = setInterval(() => {
-                    if (!isPlaying || !audioCtx) return;
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(notes[idx % notes.length], audioCtx.currentTime);
-                    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 1.6);
-                    idx++;
-                }, 450);
-            } catch (e) {
-                console.log("Audio synth failed", e);
-            }
-        }
-
-        function playMusic() {
-            const promise = audio.play();
-            if (promise !== undefined) {
-                promise.then(() => {
-                    isPlaying = true;
-                    updateMusicUI(true);
-                }).catch(() => {
-                    // Fallback to web audio synth if audio file isn't uploaded yet
-                    isPlaying = true;
-                    startSynthFallback();
-                    if (audioCtx && audioCtx.state === 'suspended') {
-                        audioCtx.resume();
-                    }
-                    updateMusicUI(true);
+        function initStars() {
+            stars = [];
+            const count = Math.floor((starCanvas.width * starCanvas.height) / 3000);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * starCanvas.width,
+                    y: Math.random() * starCanvas.height,
+                    size: Math.random() * 1.8,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.02 + 0.005
                 });
             }
         }
 
-        function pauseMusic() {
-            isPlaying = false;
-            audio.pause();
-            if (synthInterval) clearInterval(synthInterval);
-            synthInterval = null;
-            if (audioCtx) audioCtx.suspend();
-            updateMusicUI(false);
+        function drawStars() {
+            starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                starCtx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                starCtx.beginPath();
+                starCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                starCtx.fill();
+            });
+            requestAnimationFrame(drawStars);
         }
 
-        function updateMusicUI(active) {
-            if (active) {
-                musicIcon.className = "fa-solid fa-compact-disc fa-spin text-white";
-                if (musicStatus) musicStatus.innerText = "Playing 🎵";
-            } else {
-                musicIcon.className = "fa-solid fa-music text-white";
-                if (musicStatus) musicStatus.innerText = "Music Paused 🔇";
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        drawStars();
+
+        // Hearts canvas animation
+        const heartCanvas = document.getElementById('heart-canvas');
+        const heartCtx = heartCanvas.getContext('2d');
+        let heartParticles = [];
+
+        function resizeHeartCanvas() {
+            heartCanvas.width = window.innerWidth;
+            heartCanvas.height = window.innerHeight;
+        }
+
+        function createHeartParticle() {
+            if (heartParticles.length < 25) {
+                heartParticles.push({
+                    x: Math.random() * heartCanvas.width,
+                    y: heartCanvas.height + 20,
+                    size: Math.random() * 12 + 8,
+                    speedY: Math.random() * 1.5 + 0.5,
+                    speedX: Math.sin(Math.random() * Math.PI) * 0.5,
+                    opacity: Math.random() * 0.7 + 0.3
+                });
             }
         }
 
-        // Auto-play audio on user's first tap/click anywhere
-        const enableAudioOnFirstClick = () => {
-            if (!isPlaying) {
-                playMusic();
-            }
-            document.removeEventListener('click', enableAudioOnFirstClick);
-        };
-        document.addEventListener('click', enableAudioOnFirstClick, { once: true });
+        function drawHearts() {
+            heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+            heartParticles.forEach((p, index) => {
+                p.y -= p.speedY;
+                p.x += p.speedX;
+                
+                heartCtx.fillStyle = `rgba(255, 75, 130, ${p.opacity})`;
+                heartCtx.font = `${p.size}px serif`;
+                heartCtx.fillText('❤️', p.x, p.y);
 
-        // Toggle music button
+                if (p.y < -20) {
+                    heartParticles.splice(index, 1);
+                }
+            });
+            requestAnimationFrame(drawHearts);
+        }
+
+        window.addEventListener('resize', resizeHeartCanvas);
+        resizeHeartCanvas();
+        setInterval(createHeartParticle, 400);
+        drawHearts();
+
+        // Card navigation
+        function nextCard(cardNumber) {
+            document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+            document.getElementById(`card-${cardNumber}`).classList.add('active');
+            
+            if (music.paused) {
+                music.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch(e => console.log("Audio play waiting for interaction"));
+            }
+        }
+
+        function response(choice) {
+            document.getElementById('response-text').innerText = `You selected: ${choice}`;
+            nextCard(6);
+        }
+
+        // Music player setup
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+
         musicBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (isPlaying) {
-                pauseMusic();
+            if (music.paused) {
+                music.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch(err => console.log("Play blocked:", err));
             } else {
-                playMusic();
+                music.pause();
+                musicBtn.classList.remove('playing');
             }
         });
 
-        // --- 4. Playful "I Need Some Time" Button Dodge Logic ---
-        const btnNo = document.getElementById('btn-no');
-        const btnYes = document.getElementById('btn-yes');
-        let dodgeCount = 0;
-
-        function dodgeNoButton() {
-            dodgeCount++;
-            const x = (Math.random() - 0.5) * 160;
-            const y = (Math.random() - 0.5) * 80;
-
-            btnNo.style.transform = `translate(${x}px, ${y}px)`;
-
-            // Grow YES button to encourage clicking it
-            const scale = 1 + (dodgeCount * 0.08);
-            btnYes.style.transform = `scale(${Math.min(scale, 1.35)})`;
-
-            if (dodgeCount > 2) {
-                btnNo.querySelector('span').innerText = "ARE YOU SURE? 🥺";
+        // Play audio on first tap/click anywhere
+        document.addEventListener('click', function startAudioOnInteraction() {
+            if (music.paused) {
+                music.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch(e => {});
             }
-            if (dodgeCount > 5) {
-                btnNo.querySelector('span').innerText = "YES IS BETTER! 😉";
-            }
-        }
-
-        btnNo.addEventListener('mouseenter', dodgeNoButton);
-        btnNo.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            dodgeNoButton();
-        });
-
-        function celebrateYes() {
-            goToStep(6);
-            // Spawn extra celebration hearts
-            for (let i = 0; i < 40; i++) {
-                setTimeout(() => {
-                    particles.push(new Particle());
-                }, i * 50);
-            }
-        }
+            document.removeEventListener('click', startAudioOnInteraction);
+        }, { once: true });
     </script>
 </body>
 </html>
