@@ -222,10 +222,11 @@
 
     <button class="music-btn" id="music-btn" title="Toggle Music">🎵</button>
 
-    <!-- Support for both song.m4a and song.mp3 -->
+    <!-- Configured specifically for song.m4a -->
     <audio id="bg-music" loop preload="auto">
         <source src="song.m4a" type="audio/mp4">
-        <source src="song.mp3" type="audio/mpeg">
+        <source src="song.m4a" type="audio/x-m4a">
+        <source src="song.m4a" type="audio/aac">
         Your browser does not support the audio element.
     </audio>
 
@@ -282,7 +283,7 @@
             <p class="text" style="font-weight: 700; color: #ffffff; font-size: 1.15rem;">Would you give me a chance to know each other in a more special way?</p>
             
             <div class="btn-group">
-                <button class="btn" onclick="response('Yes! ❤️')">YES ❤️️</button>
+                <button class="btn" onclick="response('Yes! ❤️')">YES ❤️</button>
                 <button class="btn btn-secondary" onclick="response('I need some time 💭')">I NEED SOME TIME 💖</button>
             </div>
         </div>
@@ -384,16 +385,39 @@
         setInterval(createHeartParticle, 400);
         drawHearts();
 
-        // Card navigation
-        function nextCard(cardNumber) {
-            document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
-            document.getElementById(`card-${cardNumber}`).classList.add('active');
-            
+        // Audio controls logic
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+
+        function startPlay() {
             if (music.paused) {
                 music.play().then(() => {
                     musicBtn.classList.add('playing');
-                }).catch(e => console.log("Audio play waiting for interaction"));
+                }).catch(err => console.log("Audio play deferred to user gesture", err));
             }
+        }
+
+        function togglePlay() {
+            if (music.paused) {
+                music.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch(err => console.log("Blocked:", err));
+            } else {
+                music.pause();
+                musicBtn.classList.remove('playing');
+            }
+        }
+
+        musicBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            togglePlay();
+        });
+
+        // Step Navigation
+        function nextCard(cardNumber) {
+            document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+            document.getElementById(`card-${cardNumber}`).classList.add('active');
+            startPlay();
         }
 
         function response(choice) {
@@ -401,30 +425,10 @@
             nextCard(6);
         }
 
-        // Music player setup
-        const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-btn');
-
-        musicBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (music.paused) {
-                music.play().then(() => {
-                    musicBtn.classList.add('playing');
-                }).catch(err => console.log("Play blocked:", err));
-            } else {
-                music.pause();
-                musicBtn.classList.remove('playing');
-            }
-        });
-
-        // Play audio on first tap/click anywhere
-        document.addEventListener('click', function startAudioOnInteraction() {
-            if (music.paused) {
-                music.play().then(() => {
-                    musicBtn.classList.add('playing');
-                }).catch(e => {});
-            }
-            document.removeEventListener('click', startAudioOnInteraction);
+        // Global click to bypass browser media autoplay restriction
+        document.addEventListener('click', function unlockAudio() {
+            startPlay();
+            document.removeEventListener('click', unlockAudio);
         }, { once: true });
     </script>
 </body>
